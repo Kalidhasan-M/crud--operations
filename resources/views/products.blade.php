@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-<button class="btn btn-primary  justify-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-left: 1050px">+Add New Products</button>
+<button class="btn btn-primary  justify-end" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-left: 1020px">+Add New Products</button>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
@@ -22,36 +22,38 @@
   </div>
   <div class="offcanvas-body">
     <div class="modal-body">
-        <form class=" g-3 justify-center">
-
+        <form class=" g-3 justify-center" action="{{ route('products.store') }}" method='POST'>
+@csrf
             <div class="">
             <div class="">
-              <label for="inputEmail4" class="form-label">Product Name</label>
-              <input type="name" class="form-control" id="inputEmail4">
+              <label for="name" class="form-label">Product Name</label>
+              <input type="name" class="form-control" id="name" name="name">
             </div>
             <div class=" " >
-              <label for="inputPassword4" class="form-label">Price</label>
-              <input type="password" class="form-control" id="inputPassword4">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" name="price">
             </div>
         </div>
-        <div class=" ">
+        {{-- <div class=" ">
             <label for="inputZip" class="form-label">Image</label>
             <input type="file" class="form-control" id="inputZip">
+          </div> --}}
+            <div class=" ">
+              <label for="description" class="form-label">description</label>
+              <textarea type="text" class="form-control" id="description" name="description"></textarea>
+            </div>
+            <div class=" ">
+              <label for="stock" class="form-label">Stock</label>
+              <input type="number" class="form-control" id="stock" name="stock"></input>
+            </div>
+
+            <div class="modal-footer mt-2">
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary ml-2">Create</button>
           </div>
-            <div class=" ">
-              <label for="inputCity" class="form-label">description</label>
-              <textarea type="text" class="form-control" id="inputCity"></textarea>
-            </div>
-            <div class=" ">
-              <label for="inputCity" class="form-label">Stock</label>
-              <input type="number" class="form-control" id="inputCity"></input>
-            </div>
           </form>
     </div>
-    <div class="modal-footer mt-2">
-        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary ml-2">Create</button>
-    </div>
+  
   </div>
 </div>
         
@@ -63,33 +65,24 @@
         <th scope="col">Price</th>
         <th scope="col">Description</th>
         <th scope="col">Stock</th>
-        <th scope="col">Image</th>
+        <th scope="col">Action</th>
+
+
       </tr>
     </thead>
     <tbody>
+      @foreach ($products as $product )
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
-        <td>@mdo</td>
+        <td>{{ $product->id}}</td>
+        <td>{{ $product->name}}</td>
+        
+        <td>{{ $product->price}}</td>
+        <td>{{ $product->description}}</td>
+        <td>{{ $product->stock}}</td>
+        <td> <a href="{{ route('product_edit', $product->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
+        <td> <a href="{{ route('product.delete', $product->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a></td> 
       </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>@fat</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-        <td>@twitter</td>
-      </tr>
+      @endforeach
     </tbody>
   </table>    
    

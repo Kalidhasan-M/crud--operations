@@ -60,33 +60,23 @@
         <thead>
           <tr>
             <th scope="col">id</th>
-            <th scope="col"> Nmae</th>
+            <th scope="col"> Name</th>
             <th scope="col">Email</th>
-            <th scope="col">Password</th>
             <th scope="col">Role</th>
+            <th scope="col">Action</th>
+
           </tr>
         </thead>
         <tbody>
+          @foreach($users as $user)
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
+            <th scope="row">{{ $user->id}}</th>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
+            <td>{{$user->role}}</td>
+            <td><a href="{{ route('useredit', ['id' => $user->id]) }}" class="btn btn-warning btn-sm">Edit</a></td>
+            <td> <a href="{{ route('user.delete', $user->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a></td>  </tr>
+          @endforeach
         </tbody>
       </table>    
        
