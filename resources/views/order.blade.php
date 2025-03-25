@@ -52,9 +52,13 @@
                   <input type="number" class="form-control" id="quantity" name="quantity" required>
               </div>
               <div class="mb-3">
-                  <label for="status" class="form-label">Status</label>
-                  <input type="text" class="form-control" id="status" name="status" required>
+                <label for="status" class="form-label">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                  <option value="pending">Pending</option>
+                  <option value="placed">Placed</option>
+                </select>
               </div>
+              
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Close</button>
                   <button type="submit" class="btn btn-primary">Create</button>
@@ -72,6 +76,8 @@
               <th>Quantity</th>
               <th>Status</th>
               <th>Created At</th>
+              <th>Action</th>
+              <th></th>
           </tr>
       </thead>
       <tbody>
@@ -83,6 +89,9 @@
                   <td>{{ $order->quantity }}</td>
                   <td>{{ $order->status }}</td>
                   <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
+                  <td> <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning btn-sm">Edit</a></td>
+        <td> <a href="{{ route('orders.delete', $order->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+        </td>
               </tr>
           @endforeach
       </tbody>

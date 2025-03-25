@@ -52,8 +52,15 @@ Route::get('/delete/{id}', [ProductsController::class, 'destroy'])->name('produc
 
 
 
+
 Route::get('/order', [OrderController::class, 'index'])->name('order');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+
+Route::post('/orders/update/{id}', [OrderController::class, 'update'])->name('orders.update');
+
+Route::delete('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('orders.delete');
+
 
 
 

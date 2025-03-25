@@ -64,6 +64,7 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Action</th>
+            <th scope="col"></th>
 
           </tr>
         </thead>
